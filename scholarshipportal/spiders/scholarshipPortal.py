@@ -1,8 +1,8 @@
 import scrapy
 
 
-class ScholarshipSpider(scrapy.Spider):
-    name = 'scholarship'
+class ScholarshipPortalSpider(scrapy.Spider):
+    name = 'www.scholarshipportal.com'
     allowed_domains = ['www.scholarshipportal.com']
     start_urls = ['https://www.scholarshipportal.com/scholarships/india']
 
@@ -21,7 +21,7 @@ class ScholarshipSpider(scrapy.Spider):
 
     def parse_link(self, response):
         yield {
-            'Name': response.xpath('.//h1/text()').get(),
+            'name': response.xpath('.//h1/text()').get(),
             'for': response.xpath('.//ul/li[1]/span/text()').get(),
             'deadline': response.xpath('.//ul/li[3]/span/text()').get(),
             'link': response.xpath('//a[@rel="nofollow noopener"]/@href').get()
